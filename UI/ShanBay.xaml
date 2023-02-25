@@ -1,0 +1,35 @@
+﻿<Window x:Class="Aequor.UI.ShanBay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="扇贝单词" Width="800" Height="500">
+    <Window.Resources>
+        <materialDesign:PackIcon x:Key="LockIcon" Kind="Lock"/>
+        <materialDesign:PackIcon x:Key="UnlockIcon" Kind="Unlocked"/>
+    </Window.Resources>
+    <Canvas x:Name="MainCanvas">
+        <cefSharp:ChromiumWebBrowser Name="Browser" Width="{Binding ActualWidth, ElementName=MainCanvas}" Height="{Binding ActualHeight, ElementName=MainCanvas}"/>
+        <Button Name="ToggleLockButton" Click="ToggleLock" Canvas.Right="40" Canvas.Bottom="30" Padding="0" Width="30" Height="30" Content="{StaticResource LockIcon}" Cursor="Arrow" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ButtonAssist.CornerRadius="15" ToolTip="锁定"  Focusable="False"/>
+        <materialDesign:DialogHost Name="ErrorDialog" Identifier="ErrorDialog" Width="{Binding ActualWidth, ElementName=MainCanvas}" Height="{Binding ActualHeight, ElementName=MainCanvas}" CloseOnClickAway="True" OverlayBackground="Black" materialDesign:ElevationAssist.Elevation="Dp0">
+            <materialDesign:DialogHost.DialogContent>
+                <materialDesign:Card Padding="20" materialDesign:ElevationAssist.Elevation="Dp16">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontSize="20" FontWeight="Bold" Text="解锁失败"/>
+                        <TextBlock Margin="0,10,0,0" Text="您还未完成今天的学习任务！"/>
+                        <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" HorizontalAlignment="Right" Margin="0,15,0,0" Width="70" TextElement.FontWeight="Regular" Content="确定" Cursor="Arrow" Style="{StaticResource MaterialDesignFlatButton}" Focusable="False"/>
+                    </StackPanel>
+                </materialDesign:Card>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Canvas>
+</Window>
