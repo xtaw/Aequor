@@ -18,7 +18,7 @@ namespace Aequor.Util
         {
             try
             {
-                return JObject.Parse(HttpsUtil.SendGetString("https://apiv3.shanbay.com/wordsapp/user_material_books/odihq/learning/statuses", CookieUtil.GetCookiesByDomain(".shanbay.com"))!)["is_finished"]!.Value<bool>();
+                return JObject.Parse(HttpsUtil.SendGetString("https://apiv3.shanbay.com/wordsapp/user_material_books/" + JObject.Parse(HttpsUtil.SendGetString("https://apiv3.shanbay.com/wordsapp/user_material_books/current", CookieUtil.GetCookiesByDomain(".shanbay.com"))!)["materialbook_id"]!.Value<string>() + "/learning/statuses", CookieUtil.GetCookiesByDomain(".shanbay.com"))!)["is_finished"]!.Value<bool>();
             } catch
             {
                 return true;

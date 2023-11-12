@@ -35,7 +35,6 @@ namespace Aequor.UI
             InitializeComponent();
             Browser.RequestHandler = new AudioRequestHandler();
             Browser.Address = "https://web.shanbay.com/wordsweb/#/study/entry";
-
         }
 
         public void Lock()
@@ -102,6 +101,12 @@ namespace Aequor.UI
             {
                 Lock();
             }
+        }
+
+        private void Refresh(object sender, RoutedEventArgs e)
+        {
+            Browser.Address = "https://web.shanbay.com/wordsweb/#/study/entry";
+            Browser.Reload();
         }
     }
 
